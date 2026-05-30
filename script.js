@@ -1,22 +1,42 @@
+const cards=document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+card.classList.toggle("active");
+
+});
+
+});
+
+
+
 const counters=document.querySelectorAll(".counter");
 
 counters.forEach(counter=>{
 
-counter.innerText="0";
+const target=parseInt(counter.innerText);
+
+counter.innerText=0;
+
+let count=0;
 
 const update=()=>{
 
-const target=+counter.getAttribute("data-target") || counter.textContent;
+if(count<target){
 
-const c=+counter.innerText;
+count+=Math.ceil(target/100);
 
-const increment=target/100;
+counter.innerText=count;
 
-if(c<target){
+requestAnimationFrame(update);
 
-counter.innerText=Math.ceil(c+increment);
+}
 
-setTimeout(update,20);
+else{
+
+counter.innerText=target;
 
 }
 
@@ -24,4 +44,4 @@ setTimeout(update,20);
 
 update();
 
-})
+});
